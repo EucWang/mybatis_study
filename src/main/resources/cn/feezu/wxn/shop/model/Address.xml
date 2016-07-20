@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="cn.feezu.wxn.shop.model.Address">
+
+<insert id="add" parameterType="Address">
+		insert into s_address
+		(name, phone, postcode, receiver, user_id)
+		value (#{name}, #{phone}, #{postcode},#{receiver}, #{user_id});
+	</insert>
+
+	<update id="update" parameterType="Address">
+		update s_address set
+		name=#{name}, phone=#{phone}, postcode=#{postcode}, receiver=#{receiver}
+		where id=#{id}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete from s_address where id=#{id};
+	</delete>
+
+	<select id="load" parameterType="int" resultType="Address">
+		select * from s_address where id=#{id};
+	</select>
+	
+	<select id="load_by_user_id" parameterType="int" resultType="Address">
+		select * from s_address where user_id=#{user_id};
+	</select>
+ 
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+		
+	<!--  1. 配置数据库的配置 -->
+<configuration>
+	<properties resource="jdbc.properties" />
+	<typeAliases>
+		 <typeAlias type="cn.feezu.wxn.shop.model.User" alias="User"/>
+		 <typeAlias type="cn.feezu.wxn.shop.model.Address" alias="Address"/>
+	</typeAliases> <!-- 这一条配置必须在properties和settings配置之后 -->
+	<environments default="development">
+		<environment id="development">
+			<!--  事务管理 -->
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${username}"/>
+				<property name="password" value="${password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>
+		<mapper resource="cn/feezu/wxn/shop/model/User.xml"/>
+		<mapper resource="cn/feezu/wxn/shop/model/Address.xml"/>
+	</mappers>
+</configuration>

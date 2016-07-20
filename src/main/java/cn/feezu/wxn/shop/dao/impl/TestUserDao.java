@@ -1,0 +1,85 @@
+package cn.feezu.wxn.shop.dao.impl;
+
+import org.junit.Before;
+import org.junit.Test;
+import cn.feezu.wxn.shop.dao.DaoFactory;
+import cn.feezu.wxn.shop.dao.IUserDao;
+import cn.feezu.wxn.shop.exception.ShopException;
+import cn.feezu.wxn.shop.model.Pager;
+import cn.feezu.wxn.shop.model.SystemContext;
+import cn.feezu.wxn.shop.model.User;
+
+public class TestUserDao {
+	private IUserDao userDao;
+
+	@Before
+	public void init(){
+		userDao = DaoFactory.getUserDao();		
+	}
+
+	@Test
+	public void testAdd() {
+ 
+//		User user = getUser("zhangfei", "feifei", "123321",1);
+//		User user = getUser("zhangfei", "feifei", "123321",1);
+//		User user = getUser("zhangfei", "feifei", "123321",1);
+		User user = getUser("zhongtong", "张通", "123321",1);
+
+		try {
+			userDao.add(user);
+		} catch (ShopException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private User getUser(String name, String nickname, String pwd, int type) {
+		User user = new User();
+		user.setUsername(name);
+		user.setNickname(nickname);
+		user.setPassword(pwd);
+		user.setType(type);
+		return user;
+	}
+	
+	@Test
+	public void testUpdate(){
+		User user = userDao.loadByUsername("zhangsan");
+		user.setType(2);
+		userDao.update(user);
+	}
+	
+	@Test
+	public void testDelete(){
+		for (int i=7; i<12; i++){
+			userDao.delete(i);
+		}
+	}
+
+	
+	@Test
+	public void testLogin(){
+		User user = null;
+		try {
+			user = userDao.login("zhangsan", "123123");
+		} catch (ShopException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} 
+		if (user != null) {
+			System.out.println("登陆成功");
+		}
+	}
+	
+	@Test
+	public void testFind(){
+		SystemContext.setPageOffset(0);
+		SystemContext.setPageSize(15);
+//		SystemContext.setSort("username");
+//		SystemContext.setOrder("desc");
+		Pager<User> find = userDao.find("dong");
+		System.out.println(find.getTotalRecord());
+		for(User user : find.getDatas()){
+			System.out.println(user.toString());
+		}
+	}
+}
