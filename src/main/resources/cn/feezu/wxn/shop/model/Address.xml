@@ -9,7 +9,7 @@
 <insert id="add" parameterType="Address">
 		insert into s_address
 		(name, phone, postcode, receiver, user_id)
-		value (#{name}, #{phone}, #{postcode},#{receiver}, #{user_id});
+		value (#{name}, #{phone}, #{postcode},#{receiver}, #{user.id});
 	</insert>
 
 	<update id="update" parameterType="Address">

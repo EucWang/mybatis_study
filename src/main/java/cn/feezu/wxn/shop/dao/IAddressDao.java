@@ -11,7 +11,7 @@ public interface IAddressDao {
 	
 	public void update(Address address);
 	
-	public Address loadById(int id);
+	public Address load(int id);
 	
 	public List<Address> loadByUserId(int userId);
 }
