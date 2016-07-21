@@ -26,6 +26,13 @@ public class PropertiesUtil {
         return  daoProperties;
     }
 
+    /**
+     * 对于配置文件中配置了的DAO类,
+     * 可以调用这个方法获取DAO对象
+     * @param properties
+     * @param daoClazzName
+     * @return
+     */
     public static Object getObj(Properties properties, String daoClazzName) {
         String addressDaoClassName = properties.getProperty(daoClazzName);
         try {
@@ -41,6 +48,14 @@ public class PropertiesUtil {
         return null;
     }
 
+    /**
+     * 对于单例的对象的实例化,
+     * 如果获取对象的方法名为 getInstance
+     * 可以调用这个方法来获取对象的单例对象
+     * @param properties
+     * @param factoryName
+     * @return
+     */
     public static Object getInstance(Properties properties, String factoryName) {
         String factory = properties.getProperty(factoryName);
         Object retVal = null;

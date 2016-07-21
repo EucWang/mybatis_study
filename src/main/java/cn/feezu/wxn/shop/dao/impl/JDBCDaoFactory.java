@@ -24,9 +24,8 @@ public class JDBCDaoFactory implements IDaoFactory {
 
     public Object getDao(String daoName) {
         Properties daoProperties = PropertiesUtil.getDaoProperties();
-        IUserDao dao = (IUserDao)PropertiesUtil.getObj(daoProperties, daoName);
+        Object dao =  PropertiesUtil.getObj(daoProperties, daoName);
         if (dao != null) return dao;
         return null;
     }
-
 }
