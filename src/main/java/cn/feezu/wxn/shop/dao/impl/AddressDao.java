@@ -4,13 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.feezu.wxn.shop.dao.BaseDao;
-import cn.feezu.wxn.shop.dao.DaoFactory;
-import cn.feezu.wxn.shop.dao.IAddressDao;
-import cn.feezu.wxn.shop.dao.IUserDao;
+import cn.feezu.wxn.shop.dao.*;
 import cn.feezu.wxn.shop.exception.ShopException;
 import cn.feezu.wxn.shop.model.Address;
 import cn.feezu.wxn.shop.model.User;
+import cn.feezu.wxn.shop.util.DaoUtil;
 
 public class AddressDao extends BaseDao<Address> implements IAddressDao  {
 private IUserDao userDao;
@@ -30,7 +28,7 @@ private IUserDao userDao;
 //	} 
 	
 	public AddressDao(){
-		userDao = DaoFactory.getUserDao();
+		userDao = (IUserDao) DaoUtil.getDaoFactory().getDao("userdao");
 	}
 	 
 	public void add(Address address, int userId) throws ShopException{

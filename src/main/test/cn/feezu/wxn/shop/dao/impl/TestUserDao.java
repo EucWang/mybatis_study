@@ -1,8 +1,8 @@
 package cn.feezu.wxn.shop.dao.impl;
 
+import cn.feezu.wxn.shop.util.DaoUtil;
 import org.junit.Before;
 import org.junit.Test;
-import cn.feezu.wxn.shop.dao.DaoFactory;
 import cn.feezu.wxn.shop.dao.IUserDao;
 import cn.feezu.wxn.shop.exception.ShopException;
 import cn.feezu.wxn.shop.model.Pager;
@@ -14,7 +14,7 @@ public class TestUserDao {
 
 	@Before
 	public void init(){
-		userDao = DaoFactory.getUserDao();		
+		userDao = (IUserDao) DaoUtil.getDaoFactory().getDao("userdao");
 	}
 
 	@Test
@@ -23,7 +23,7 @@ public class TestUserDao {
 //		User user = getUser("zhangfei", "feifei", "123321",1);
 //		User user = getUser("zhangfei", "feifei", "123321",1);
 //		User user = getUser("zhangfei", "feifei", "123321",1);
-		User user = getUser("guanyu", "关羽", "123321",2);
+		User user = getUser("sunwukong", "孙悟空", "123321",3);
 
 		try {
 			userDao.add(user);
