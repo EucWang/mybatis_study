@@ -24,12 +24,32 @@
 		delete from s_user where id=#{id};
 	</delete>
 
-	<select id="load" parameterType="int" resultType="User">
-		select * from s_user where id=#{id};
+	<resultMap type="User" id="userMap" autoMapping="true">
+		<!-- 因为会存在出现获取的表数据中有2个名称为id的属性,这样采用默认获取id会失败
+			所以这里使用user_id作为id,保证唯一性  -->
+		<id column="user_id"  property="id"/>
+		<collection property="addresses" 
+			ofType="Address">
+			<id column="a_id" property="id" />
+			<result column="phone" property="phone"/>
+			<result column="postcode" property="postcode"/>
+			<result column="name" property="name" />
+			<result column="receiver" property="receiver"/>
+		</collection>
+	</resultMap>
+
+	<select id="load" parameterType="int" resultMap="userMap">
+		<!--select * from s_user where id=#{id}; -->
+		select *, s2.id as 'a_id' from s_user s1  left join s_address s2
+		on (s1.id=s2.user_id)
+		where s1.id=#{id}
 	</select>
 	
-	<select id="load_by_username" parameterType="string" resultType="User">
-		select * from s_user where username=#{username};
+	<select id="load_by_username" parameterType="string" resultMap="userMap">
+		<!--select * from s_user where username=#{username}; -->
+		select *, s2.id as 'a_id' from s_user s1  left join s_address s2
+		on (s1.id=s2.user_id)
+		where s1.username=#{username}
 	</select>
 	
 	<!-- #替换如果是字符串会默认加上引号,

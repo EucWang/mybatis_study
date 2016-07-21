@@ -82,11 +82,4 @@ public class TestUserDao {
 			System.out.println(user.toString());
 		}
 	}
-	
-	@Test
-	public void testLoad(){
-		User user = userDao.load(6);
-		System.out.println(user.toString());
-		
-	}
 }

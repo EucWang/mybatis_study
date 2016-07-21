@@ -32,7 +32,7 @@ private IUserDao userDao;
 	public AddressDao(){
 		userDao = DaoFactory.getUserDao();
 	}
-	
+	 
 	public void add(Address address, int userId) throws ShopException{
 		User user = userDao.load(userId);
 		if (user == null) {

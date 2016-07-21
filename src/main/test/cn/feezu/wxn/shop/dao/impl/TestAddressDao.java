@@ -9,7 +9,7 @@ import cn.feezu.wxn.shop.dao.IUserDao;
 import cn.feezu.wxn.shop.model.Address;
 import cn.feezu.wxn.shop.model.User;
 
-public class AddressDaoTest {
+public class TestAddressDao {
 	private IAddressDao addressDao;
 
 	@Before
@@ -25,9 +25,14 @@ public class AddressDaoTest {
 		address.setPostcode("443322");
 		address.setReceiveUser("橙色小摩托");
 		
-		User loadByUsername = DaoFactory.getUserDao().loadByUsername("zhangsan");
+		//User loadByUsername = DaoFactory.getUserDao().loadByUsername("zhangsan");
 		
-		address.setUser(loadByUsername);
-		addressDao.add(address);
+		//address.setUser(loadByUsername);
+		addressDao.add(address , 6);
 	}
+
+             @Test
+             public void testLoad(){
+                        Address address = addressDao.load(1);
+             }
 }

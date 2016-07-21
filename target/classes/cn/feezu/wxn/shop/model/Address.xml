@@ -6,7 +6,7 @@
 
 <mapper namespace="cn.feezu.wxn.shop.model.Address">
 
-<insert id="add" parameterType="Address">
+	<insert id="add" parameterType="Address">
 		insert into s_address
 		(name, phone, postcode, receiver, user_id)
 		value (#{name}, #{phone}, #{postcode},#{receiver}, #{user.id});
@@ -22,12 +22,63 @@
 		delete from s_address where id=#{id};
 	</delete>
 
-	<select id="load" parameterType="int" resultType="Address">
+	<!--  当数据库中的字段信息和对象的属性不一致时,需要通过resultMap来映射-->
+	<resultMap type="Address" id="addressMap" autoMapping="true">
+		<!-- <id column="id" property="id" /> -->
+		<!--result column=post_code" property="postcode"/-->
+
+		<!-- 使用以下方式关联,最大的问题就是N+１问题，会发送很多条查询，不推荐使用-->
+		<!-- <association property="user" 
+			column="user_id" 
+			javaType="User"
+			select="cn.feezu.wxn.shop.model.User.load">
+			select 对应User.xml中的load方法
+		</association> --><!-- 关联-->
+
+		<!-- 第二种关联方式-->
+		<!--  关联对象需要手动映射-->
+		<!-- <id column="a_id" property="id"> -->
+	<!-- 	<result column=post_code" property="postcode"/> -->
+		<!-- <association property="user"
+			javaType="User">
+			<id  column="user_id" property="id"  />
+			<result column="username" property="username" />
+			<result column="nickname" property="nickname" />
+			<result column="type" property="type" />
+		</association> -->
+
+		<!-- 第三种关联方式-->
+		<id column="a_id" property="id" />
+		<!--result column=post_code" property="postcode"/-->
+		<association property="user"
+			javaType="User" 
+			resultMap="userMap">
+		</association>
+	</resultMap>
+
+	<!-- 第三种关联方式-->
+	<resultMap type="User" id="userMap">
+		<id  column="user_id" property="id"  />
+		<result column="username" property="username" />
+		<result column="nickname" property="nickname" />
+		<result column="type" property="type" />
+	</resultMap>
+
+
+<!-- 	<select id="load" parameterType="int" resultMap="addressMap">
 		select * from s_address where id=#{id};
+	</select> -->
+
+	<select id="load" parameterType="int" resultMap="addressMap">
+		select *, s1.id as 'a_id' from s_address s1 right join s_user s2 
+		on (s1.user_id=s2.id) 
+		where s1.id=#{id}
 	</select>
 	
-	<select id="load_by_user_id" parameterType="int" resultType="Address">
-		select * from s_address where user_id=#{user_id};
+	<select id="list" parameterType="int" resultMap="addressMap">
+		select *, s1.id as 'a_id' from s_address s1 right join s_user s2
+		on (s1.user_id=s2.id)
+		where user.id=#{userId};
 	</select>
  
 </mapper>
