@@ -2,9 +2,7 @@ package cn.feezu.wxn.shop.util;
 
 import cn.feezu.wxn.shop.dao.IDaoFactory;
 import cn.feezu.wxn.shop.model.ShopDi;
-import cn.feezu.wxn.shop.util.PropertiesUtil;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Properties;
 

@@ -1,12 +1,8 @@
 package cn.feezu.wxn.shop.dao.impl;
 
-import cn.feezu.wxn.shop.dao.IAddressDao;
 import cn.feezu.wxn.shop.dao.IDaoFactory;
-import cn.feezu.wxn.shop.dao.IUserDao;
 import cn.feezu.wxn.shop.util.PropertiesUtil;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 public class JDBCDaoFactory implements IDaoFactory {

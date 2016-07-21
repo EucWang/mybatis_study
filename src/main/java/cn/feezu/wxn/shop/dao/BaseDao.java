@@ -1,18 +1,14 @@
 package cn.feezu.wxn.shop.dao;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import cn.feezu.wxn.shop.model.Pager;
+import cn.feezu.wxn.shop.model.SystemContext;
+import cn.feezu.wxn.shop.util.DaoUtil;
+import cn.feezu.wxn.shop.util.MyBatisUtil;
+import org.apache.ibatis.session.SqlSession;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import cn.feezu.wxn.shop.util.DaoUtil;
-import com.mysql.jdbc.StringUtils;
-import org.apache.ibatis.session.SqlSession;
-
-import cn.feezu.wxn.shop.model.Pager;
-import cn.feezu.wxn.shop.model.SystemContext;
-import cn.feezu.wxn.shop.util.MyBatisUtil;
 
 public class BaseDao<T> {
 

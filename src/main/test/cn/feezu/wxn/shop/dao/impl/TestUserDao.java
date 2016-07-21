@@ -1,14 +1,13 @@
 package cn.feezu.wxn.shop.dao.impl;
 
-import cn.feezu.wxn.shop.model.ShopDi;
-import cn.feezu.wxn.shop.util.DaoUtil;
-import org.junit.Before;
-import org.junit.Test;
 import cn.feezu.wxn.shop.dao.IUserDao;
 import cn.feezu.wxn.shop.exception.ShopException;
 import cn.feezu.wxn.shop.model.Pager;
+import cn.feezu.wxn.shop.model.ShopDi;
 import cn.feezu.wxn.shop.model.SystemContext;
 import cn.feezu.wxn.shop.model.User;
+import org.junit.Before;
+import org.junit.Test;
 
 public class TestUserDao extends BaseTest {
 	private IUserDao userDao;

@@ -1,13 +1,11 @@
 package cn.feezu.wxn.shop.dao.impl;
 
+import cn.feezu.wxn.shop.dao.IAddressDao;
 import cn.feezu.wxn.shop.exception.ShopException;
+import cn.feezu.wxn.shop.model.Address;
 import cn.feezu.wxn.shop.model.ShopDi;
-import cn.feezu.wxn.shop.util.DaoUtil;
 import org.junit.Before;
 import org.junit.Test;
-
-import cn.feezu.wxn.shop.dao.IAddressDao;
-import cn.feezu.wxn.shop.model.Address;
 
 public class TestAddressDao extends BaseTest {
 
