@@ -1,38 +1,52 @@
 package cn.feezu.wxn.shop.dao.impl;
 
+import cn.feezu.wxn.shop.dao.IAddressDao;
+import cn.feezu.wxn.shop.exception.ShopException;
+import cn.feezu.wxn.shop.model.Address;
+import cn.feezu.wxn.shop.model.ShopDi;
 import org.junit.Before;
 import org.junit.Test;
 
-import cn.feezu.wxn.shop.dao.DaoFactory;
-import cn.feezu.wxn.shop.dao.IAddressDao;
-import cn.feezu.wxn.shop.dao.IUserDao;
-import cn.feezu.wxn.shop.model.Address;
-import cn.feezu.wxn.shop.model.User;
+public class TestAddressDao extends BaseTest {
 
-public class TestAddressDao {
-	private IAddressDao addressDao;
 
-	@Before
-	public void init(){
-		addressDao = DaoFactory.getAddressDao();		
-	}
-	
-	@Test
-	public void testAdd(){
-		Address address = new Address();
-		address.setName("林肯街15号,火星区,太阳市");
-		address.setPhone("15714521547");
-		address.setPostcode("443322");
-		address.setReceiveUser("橙色小摩托");
-		
-		//User loadByUsername = DaoFactory.getUserDao().loadByUsername("zhangsan");
-		
-		//address.setUser(loadByUsername);
-		addressDao.add(address , 6);
-	}
+    private IAddressDao addressDao;
 
-             @Test
-             public void testLoad(){
-                        Address address = addressDao.load(1);
-             }
+    public IAddressDao getAddressDao() {
+        return addressDao;
+    }
+
+    @ShopDi
+    public void setAddressDao(IAddressDao addressDao) {
+        this.addressDao = addressDao;
+    }
+
+    @Before
+    public void init() {
+//        addressDao = (IAddressDao) DaoUtil.getDaoFactory().getDao("addressDao");
+    }
+
+    @Test
+    public void testAdd() {
+        Address address = new Address();
+        address.setName("刀郎街15号,金星区,半人马市");
+        address.setPhone("15712345678");
+        address.setPostcode("234234");
+        address.setReceiveUser("橙色大飞机");
+
+        //User loadByUsername = JDBCDaoFactory.getUserDao().loadByUsername("zhangsan");
+
+        //address.setUser(loadByUsername);
+        try {
+            addressDao.add(address, 6);
+        } catch (ShopException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testLoad() {
+        Address address = addressDao.load(1);
+        System.out.println(address);
+    }
 }

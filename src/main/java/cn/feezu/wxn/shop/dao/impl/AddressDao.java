@@ -4,18 +4,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.feezu.wxn.shop.dao.BaseDao;
-import cn.feezu.wxn.shop.dao.DaoFactory;
-import cn.feezu.wxn.shop.dao.IAddressDao;
-import cn.feezu.wxn.shop.dao.IUserDao;
+import cn.feezu.wxn.shop.dao.*;
 import cn.feezu.wxn.shop.exception.ShopException;
 import cn.feezu.wxn.shop.model.Address;
+import cn.feezu.wxn.shop.model.ShopDi;
 import cn.feezu.wxn.shop.model.User;
+import cn.feezu.wxn.shop.util.DaoUtil;
 
-public class AddressDao extends BaseDao<Address> implements IAddressDao  {
-private IUserDao userDao;
+public class AddressDao extends BaseDao<Address> implements IAddressDao {
+    private IUserDao userDao;
 
-// 
+    public IUserDao getUserDao() {
+        return userDao;
+    }
+
+    @ShopDi()
+    public void setUserDao(IUserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    //
 //	public void add(Address address){
 //		SqlSession session = null;
 //		try {
@@ -28,25 +36,25 @@ private IUserDao userDao;
 //			 MyBatisUtil.closeSession(session); 
 //		}
 //	} 
-	
-	public AddressDao(){
-		userDao = DaoFactory.getUserDao();
-	}
-	 
-	public void add(Address address, int userId) throws ShopException{
-		User user = userDao.load(userId);
-		if (user == null) {
-			throw new ShopException("添加地址的用户不存在!");
-		}
-		
-		address.setUser(user);
-		super.add(address);
-	}
 
-	/**
-	 * 删除用户
-	 */
-	public void delete(int id) {
+    public AddressDao() {
+//        userDao = (IUserDao) DaoUtil.getDaoFactory().getDao("userDao");
+    }
+
+    public void add(Address address, int userId) throws ShopException {
+        User user = userDao.load(userId);
+        if (user == null) {
+            throw new ShopException("添加地址的用户不存在!");
+        }
+
+        address.setUser(user);
+        super.add(address);
+    }
+
+    /**
+     * 删除用户
+     */
+    public void delete(int id) {
 //		SqlSession session = null;
 //
 //		try {
@@ -58,10 +66,10 @@ private IUserDao userDao;
 //		} finally {
 //			 MyBatisUtil.closeSession(session); 
 //		}
-		super.delete(Address.class, id);
-	}
+        super.delete(Address.class, id);
+    }
 
-	public void update(Address address) {
+    public void update(Address address) {
 //		SqlSession session = null;
 //
 //		try {
@@ -73,10 +81,10 @@ private IUserDao userDao;
 //		} finally {
 //			 MyBatisUtil.closeSession(session); 
 //		}
-		super.update(address);
-	}
+        super.update(address);
+    }
 
-	public Address load(int id) {
+    public Address load(int id) {
 //		SqlSession session = null;
 //		Address address = null;
 //		try {
@@ -90,10 +98,10 @@ private IUserDao userDao;
 //		}
 //		
 //		return address;
-		return super.load(Address.class, id);
-	}
+        return super.load(Address.class, id);
+    }
 
-	public List<Address> loadByUserId(int userId) {
+    public List<Address> loadByUserId(int userId) {
 //		SqlSession session = null;
 //		List<Address> addresses = null;
 //		try { 
@@ -107,9 +115,9 @@ private IUserDao userDao;
 //		}
 //		
 //		return addresses;
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("userId", userId);
-		return super.list(Address.class +".load_by_user_id", params);
-	}
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("userId", userId);
+        return super.list(Address.class + ".load_by_user_id", params);
+    }
 
 }

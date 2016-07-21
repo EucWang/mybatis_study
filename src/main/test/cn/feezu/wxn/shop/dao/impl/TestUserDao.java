@@ -1,20 +1,29 @@
 package cn.feezu.wxn.shop.dao.impl;
 
-import org.junit.Before;
-import org.junit.Test;
-import cn.feezu.wxn.shop.dao.DaoFactory;
 import cn.feezu.wxn.shop.dao.IUserDao;
 import cn.feezu.wxn.shop.exception.ShopException;
 import cn.feezu.wxn.shop.model.Pager;
+import cn.feezu.wxn.shop.model.ShopDi;
 import cn.feezu.wxn.shop.model.SystemContext;
 import cn.feezu.wxn.shop.model.User;
+import org.junit.Before;
+import org.junit.Test;
 
-public class TestUserDao {
+public class TestUserDao extends BaseTest {
 	private IUserDao userDao;
+
+
+	public IUserDao getUserDao() {
+		return userDao;
+	}
+	@ShopDi
+	public void setUserDao(IUserDao userDao) {
+		this.userDao = userDao;
+	}
 
 	@Before
 	public void init(){
-		userDao = DaoFactory.getUserDao();		
+//		userDao = (IUserDao) DaoUtil.getDaoFactory().getDao("userDao");
 	}
 
 	@Test
@@ -23,7 +32,7 @@ public class TestUserDao {
 //		User user = getUser("zhangfei", "feifei", "123321",1);
 //		User user = getUser("zhangfei", "feifei", "123321",1);
 //		User user = getUser("zhangfei", "feifei", "123321",1);
-		User user = getUser("guanyu", "关羽", "123321",2);
+		User user = getUser("zhubajie", "猪八戒", "654321",1);
 
 		try {
 			userDao.add(user);
@@ -44,7 +53,7 @@ public class TestUserDao {
 	@Test
 	public void testUpdate(){
 		User user = userDao.loadByUsername("zhangsan");
-		user.setType(2);
+		user.setType(3);
 		userDao.update(user);
 	}
 	

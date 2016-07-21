@@ -24,7 +24,11 @@
 			<version>3.0.1</version>
 			<scope>provided</scope> <!-- 只在编译时和测试时运行的依赖 -->
 		</dependency>
-
+		<dependency>  <!-- jstl标签库 -->
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
 		<dependency>            <!-- mybatis的依赖 -->
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
