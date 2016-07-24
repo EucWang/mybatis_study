@@ -1,13 +1,13 @@
 package cn.feezu.wxn.shop.model;
 
 public class Merchandise {
-	private int id;
-	private String name;
-	private String intro;
-	private Category category;
-	private int stock;
-	private double price;
-	private String img;
+	private int id; //
+	private String name; //
+	private String intro; //
+	private Category category; //
+	private int stock;  //
+	private double price; //
+	private String img; //
 	
 	
 	public int getId() {

@@ -8,6 +8,7 @@
 	<typeAliases>
 		 <typeAlias type="cn.feezu.wxn.shop.model.User" alias="User"/>
 		 <typeAlias type="cn.feezu.wxn.shop.model.Address" alias="Address"/>
+		 <typeAlias type="cn.feezu.wxn.shop.model.Merchandise" alias="Merchandise"/>
 	</typeAliases> <!-- 这一条配置必须在properties和settings配置之后 -->
 	<environments default="development">
 		<environment id="development">
@@ -25,5 +26,6 @@
 	<mappers>
 		<mapper resource="cn/feezu/wxn/shop/model/User.xml"/>
 		<mapper resource="cn/feezu/wxn/shop/model/Address.xml"/>
+		<mapper resource="cn/feezu/wxn/shop/model/Merchandise/xml" />
 	</mappers>
 </configuration>
